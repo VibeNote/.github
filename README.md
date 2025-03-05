@@ -13,6 +13,8 @@
 ### Сервисы командной разработки
 ###
 * [Jira](https://vibenote.atlassian.net/jira/software/projects/VD/boards/2)
+###
+  Для проверяющего yeticrazy505@gmail.com:q1w2e4r5t6y7
 ### Презентация проекта
 ### Документация
 
