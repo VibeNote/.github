@@ -14,6 +14,7 @@ VibeNote реализует интеграцию ИИ-сервиса, котор
 ### Сервисы командной разработки
 ###
 * [Jira](https://vibenote.atlassian.net/jira/software/projects/VD/boards/2)
+* [Figma]()
 ###
   Для проверяющего yeticrazy505@gmail.com:q1w2e4r5t6y7
 ### Презентация проекта
