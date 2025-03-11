@@ -89,6 +89,34 @@ paths:
                 $ref: "#/components/schemas/Token"
       security:
         - access_token: []
+  /users/:
+    put:
+      tags:
+        - Users
+      summary: Update user profile
+      operationId: updateProfile
+      requestBody:
+        description: User credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUser"
+      responses:
+        "200":
+          description: User was updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+        "401": 
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - access_token: []
   /entries:
     get:
       tags:
@@ -320,6 +348,16 @@ components:
         username:
           type: string
           example: theUser
+    UpdateUser:
+      required:
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+          example: sadJohn
+      xml:
+        name: updateUser
     Error:
       required:
         - code
