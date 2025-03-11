@@ -96,7 +96,7 @@ paths:
       summary: Update user profile
       operationId: updateProfile
       requestBody:
-        description: User credentials
+        description: User update model
         required: true
         content:
           application/json:
