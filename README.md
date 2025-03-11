@@ -21,6 +21,9 @@ VibeNote реализует интеграцию ИИ-сервиса, котор
 #### Структура базы данных
 ![Изображение базы данных](img/databaseDiagram-v-0.0.1.png)  
 Версия 0.0.1
+#### Описание API
+[YAML файл api](sources/openapi.yaml)  
+Версия 0.0.1
 ### Документация
 ###
 * [ТЗ](https://drive.google.com/file/d/1SUhNhrmwD9bmNEXAi_tsTpqTMhptm6IR/view?usp=sharing)

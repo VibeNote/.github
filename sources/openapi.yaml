@@ -1,0 +1,384 @@
+openapi: 3.0.3
+info:
+  title: VibeNote
+  version: 0.0.1
+tags:
+  - name: Users
+    description: Users authetification
+  - name: Entry
+    description: Entry control
+  - name: Analysis
+    description: Analysis of entries
+paths:
+  /users/login:
+    post:
+      tags:
+        - Users
+      summary: Login user
+      operationId: login
+      requestBody:
+        description: User credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCredentials"
+      responses:
+        "200":
+          description: User was logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+        "400":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404": 
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/register:
+    post:
+      tags:
+        - Users
+      summary: Login user
+      operationId: register
+      requestBody:
+        description: User credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCredentials"
+      responses:
+        "200":
+          description: User was registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+        "400":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409": 
+          description: Email or username were taken
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/logout:
+    post:
+      tags:
+        - Users
+      summary: Logout user
+      operationId: logout
+      responses:
+        "200":
+          description: User was logged out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+      security:
+        - access_token: []
+  /entries:
+    get:
+      tags:
+        - Entry
+      summary: Get user entries
+      operationId: getEntryList
+      responses:
+        "200":
+          description: Entry infos were returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EntryInfo"
+        "401": 
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - access_token: []
+    post:
+      tags:
+        - Entry
+      summary: Save new entry
+      operationId: saveEntry
+      requestBody:
+        description: Entry info
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveEntry"
+      responses:
+        "200":
+          description: Entry was saved
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Entry"
+        "401": 
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - access_token: []
+  /entries/{id}:
+    get:
+      tags:
+        - Entry
+      summary: Get entry full information
+      operationId: getEntry      
+      parameters:
+      - in: path
+        name: id
+        description: Entry id
+        required: true
+        schema:
+          type: string
+          example: GUID
+      responses:
+        "200":
+          description: Entry was returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Entry"
+        "401": 
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - access_token: []
+  /analysis:
+    post:
+      tags:
+        - Analysis
+      summary: Analyzes entry
+      operationId: analyzeNotSavedEntry
+      requestBody:
+        description: Entry content
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalysisInput"
+      responses:
+        "200":
+          description: Entry was analyzed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EntryAnalysis"
+        "500": 
+          description: Analysis error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /analysis/{entryId}:
+    post:
+      tags:
+        - Analysis
+      summary: Analyzes entry
+      operationId: analyzeSavedEntry
+      parameters:
+      - in: path
+        name: entryId
+        description: Entry id
+        required: true
+        schema:
+          type: string
+          example: GUID
+      responses:
+        "200":
+          description: Entry was analyzed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EntryAnalysis"
+        "500": 
+          description: Analysis error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - access_token: []
+components:
+  schemas:
+    SaveEntry:
+      required:
+        - content
+      type: object
+      properties:
+        content:
+          type: string
+          example: Bad day...
+      xml:
+        name: saveEntry
+    Entry:
+      required:
+        - content
+        - id
+        - createdAt
+      type: object
+      properties:
+        id:
+          type: string
+          example: GUID
+        content:
+          type: string
+          example: Bad day...
+        createdAt:
+          type: string
+          example: "11.03.2024 16:03"
+        updatedAt:
+          type: string
+          example: "11.03.2024 16:03"
+        analysis:
+          $ref: "#/components/schemas/EntryAnalysis"
+      xml:
+        name: entry
+    EntryInfo:
+      required:
+        - content
+        - id
+        - createdAt
+      type: object
+      properties:
+        id:
+          type: string
+          example: GUID
+        content:
+          type: string
+          example: Bad day...
+        createdAt:
+          type: string
+          example: "11.03.2024 16:03"
+        updatedAt:
+          type: string
+          example: "11.03.2024 16:03"
+        tags:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalysisTags"
+      xml:
+        name: entry
+    UserCredentials:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+      xml:
+        name: userCredentials
+    RegisterUser:
+      required:
+        - username
+        - credentials
+      type: object
+      properties:
+        username:
+          type: string
+          example: sadJohn
+        credentials:
+          $ref: "#/components/schemas/UserCredentials"
+      xml:
+        name: registerUser
+    Token:
+      required:
+        - access_token
+        - username
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        username:
+          type: string
+          example: theUser
+    Error:
+      required:
+        - code
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: Unlucky
+    EntryAnalysis:
+      required:
+        - entryText
+        - result
+        - tags
+      type: object
+      properties:
+        id:
+          type: string
+          example: GUID
+        entryText:
+          type: string
+          example: Bad day...
+        result:
+          type: string
+          example: Have a good day!
+        tags:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalysisTags"
+      xml:
+        name: entryAnalysis
+    AnalysisInput:
+      required:
+        - entryText
+      type: object
+      properties:
+        entryText:
+          type: string
+          example: Bad day...
+      xml:
+        name: analysisInput
+    AnalysisTags:
+      required:
+        - tagName
+        - value
+      type: object
+      properties:
+        tagName:
+          type: string
+          example: Sad
+        value:
+          type: integer
+          example: 52
+      xml:
+        name: analysisTags
+  securitySchemes:
+    access_token:
+      type: apiKey
+      name: access_token
+      in: header
