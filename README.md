@@ -30,3 +30,5 @@ VibeNote реализует интеграцию ИИ-сервиса, котор
 * [Предпроектное исследование](https://drive.google.com/file/d/1dWx-IMSPN8mDc9oY7GV2tXZ16IUafDv-/view?usp=sharing)
 * [OKR](https://drive.google.com/file/d/1ItsxCKEzz1SkJlatEYLo-2SVJoCTJQJ2/view?usp=sharing)
 * [User Stories](https://drive.google.com/file/d/1zcQbhzrTNIVu7Wm49FaxXAMRn2HvxNxw/view?usp=sharing)
+* [Политика конфиденциальности](https://drive.google.com/file/d/18g4GOn6FYh2BdVEtJopl4KUdxfK5XWt9/view?usp=sharing)
+* [Пользовательское соглашение](https://drive.google.com/file/d/1lhuFxS3JPZgIxJtJQc1MVHOFX9O1542g/view?usp=sharing)
