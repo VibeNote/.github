@@ -26,7 +26,7 @@ VibeNote реализует интеграцию ИИ-сервиса, котор
 Версия 0.0.1
 ### Документация
 ###
-* [ТЗ](https://drive.google.com/file/d/1SUhNhrmwD9bmNEXAi_tsTpqTMhptm6IR/view?usp=sharing)
+* [ТЗ](https://drive.google.com/file/d/1eFJBYnqYbe05yNu3Igw13ZEYK3fNA8kS/view?usp=sharing)
 * [Предпроектное исследование](https://drive.google.com/file/d/1dWx-IMSPN8mDc9oY7GV2tXZ16IUafDv-/view?usp=sharing)
 * [OKR](https://drive.google.com/file/d/1ItsxCKEzz1SkJlatEYLo-2SVJoCTJQJ2/view?usp=sharing)
 * [User Stories](https://drive.google.com/file/d/1zcQbhzrTNIVu7Wm49FaxXAMRn2HvxNxw/view?usp=sharing)
