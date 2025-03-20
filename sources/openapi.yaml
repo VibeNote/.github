@@ -117,6 +117,26 @@ paths:
                 $ref: "#/components/schemas/Error"
       security:
         - access_token: []
+    get:
+      tags:
+        - Users
+      summary: Get user profile
+      operationId: getProfile
+      responses:
+        "200":
+          description: User info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInfo"
+        "401": 
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - access_token: []
   /entries:
     get:
       tags:
@@ -323,6 +343,20 @@ components:
           example: '12345'
       xml:
         name: userCredentials
+    UserInfo:
+      required:
+        - email
+        - username
+      type: object
+      properties:
+        email:
+          type: string
+          example: john@email.com
+        username:
+          type: string
+          example: sadJohn
+      xml:
+        name: userInfo
     RegisterUser:
       required:
         - username
