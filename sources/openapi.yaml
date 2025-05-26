@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VibeNote
-  version: 0.0.1
+  version: 0.1.0
 tags:
   - name: Users
     description: Users authetification
@@ -331,13 +331,13 @@ components:
         name: entry
     UserCredentials:
       required:
-        - email
+        - login
         - password
       type: object
       properties:
-        email:
+        login:
           type: string
-          example: john@email.com
+          example: John123XDD
         password:
           type: string
           example: '12345'
@@ -345,13 +345,13 @@ components:
         name: userCredentials
     UserInfo:
       required:
-        - email
+        - login
         - username
       type: object
       properties:
-        email:
+        login:
           type: string
-          example: john@email.com
+          example: John123XDD
         username:
           type: string
           example: sadJohn
