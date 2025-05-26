@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VibeNote
-  version: 0.0.1
+  version: 0.1.2
 tags:
   - name: Users
     description: Users authetification
@@ -212,32 +212,6 @@ paths:
                 $ref: "#/components/schemas/Error"
       security:
         - access_token: []
-  /analysis:
-    post:
-      tags:
-        - Analysis
-      summary: Analyzes entry
-      operationId: analyzeNotSavedEntry
-      requestBody:
-        description: Entry content
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AnalysisInput"
-      responses:
-        "200":
-          description: Entry was analyzed
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/EntryAnalysis"
-        "500": 
-          description: Analysis error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   /analysis/{entryId}:
     post:
       tags:
