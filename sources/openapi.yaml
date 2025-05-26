@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VibeNote
-  version: 0.1.0
+  version: 0.0.1
 tags:
   - name: Users
     description: Users authetification
@@ -83,10 +83,6 @@ paths:
       responses:
         "200":
           description: User was logged out
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Token"
       security:
         - access_token: []
   /users/:
@@ -149,7 +145,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/EntryInfo"
+                type: array
+                items:
+                  $ref: "#/components/schemas/EntryInfo"
         "401": 
           description: Invalid token
           content:
@@ -301,7 +299,7 @@ components:
           type: string
           example: "11.03.2024 16:03"
         analysis:
-          $ref: "#/components/schemas/EntryAnalysis"
+          $ref: "#/components/schemas/EntryInfoAnalysis"
       xml:
         name: entry
     EntryInfo:
@@ -416,6 +414,24 @@ components:
         entryText:
           type: string
           example: Bad day...
+        result:
+          type: string
+          example: Have a good day!
+        tags:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalysisTags"
+      xml:
+        name: entryAnalysis
+    EntryInfoAnalysis:
+      required:
+        - result
+        - tags
+      type: object
+      properties:
+        id:
+          type: string
+          example: GUID
         result:
           type: string
           example: Have a good day!
